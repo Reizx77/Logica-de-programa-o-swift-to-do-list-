@@ -29,6 +29,21 @@ func removerTarefa(_ tarefas: inout [String]) {
     }
 }
 
+// Função para editar o nome de uma tarefa
+func editarTarefa(_ tarefas: inout [String]) {
+    listarTarefas(tarefas)
+    print("Número da tarefa para editar:")
+    if let e = readLine(), let i = Int(e),
+       i > 0 && i <= tarefas.count {
+        print("Novo nome da tarefa:")
+        if let novoNome = readLine(), !novoNome.isEmpty {
+            // Mantém o status [ ] ou [x] e substitui o texto
+            let prefixo = String(tarefas[i-1].prefix(3))
+            tarefas[i-1] = "\(prefixo) \(novoNome)"
+        }
+    }
+}
+
 // Função para contar tarefas
 func contarTarefas(_ tarefas: [String]) {
     print("Você tem \(tarefas.count) tarefa(s).")
@@ -40,7 +55,7 @@ func limparTarefas(_ tarefas: inout [String]) {
     print("Todas as tarefas foram apagadas.")
 }
 
-// Função para marcar/desmarcar
+// Função para marcar/desmarcar concluída
 func alternarConclusao(_ tarefas: inout [String]) {
     listarTarefas(tarefas)
     print("Número da tarefa para marcar/desmarcar:")
@@ -63,12 +78,14 @@ func iniciarApp() {
 
     while rodando {
         print("""
+        ===== Lista de Tarefas =====
         1 - Adicionar
         2 - Listar
         3 - Remover
         4 - Contar tarefas
         5 - Limpar todas
         6 - Marcar/Desmarcar concluída
+        7 - Editar tarefa
         0 - Sair
         Escolha:
         """)
@@ -81,6 +98,7 @@ func iniciarApp() {
             case 4: contarTarefas(tarefas)
             case 5: limparTarefas(&tarefas)
             case 6: alternarConclusao(&tarefas)
+            case 7: editarTarefa(&tarefas)
             case 0: rodando = false
             default: print("Opção inválida.")
             }
@@ -88,4 +106,5 @@ func iniciarApp() {
     }
 }
 
+// Inicia o programa
 iniciarApp()
