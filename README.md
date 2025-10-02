@@ -29,3 +29,17 @@ O programa implementa um gerenciador de tarefas simples via terminal, sem uso de
 
 ## ▶️ Exemplo de Execução
 
+=== Lista de Tarefas ===
+1 - Listar tarefas
+2 - Adicionar tarefa
+3 - Remover tarefa
+4 - Editar tarefa
+0 - Sair
+Escolha uma opção:
+2
+Digite a nova tarefa:
+Estudar Swift
+Tarefa adicionada com sucesso.
+
+=== Lista de Tarefas ===
+
