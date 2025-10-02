@@ -1,40 +1,81 @@
 import Foundation
 
 func iniciarApp() {
-    var tarefas: [String] = []
-    var rodando = true
+    var tarefas: [String] = []   // Lista de tarefas
+    var rodando = true           // Controle do loop
 
     while rodando {
         print("""
-        
-        Lista de Tarefas 
-        1 - Adicionar tarefa
-        2 - Remover tarefa
-        3 - Listar tarefas
-        4 - Editar tarefa
-        5 - Marcar/Desmarcar concluída
-        6 - Contar tarefas pendentes
+        1 - Adicionar
+        2 - Listar
+        3 - Remover
+        4 - Contar tarefas
+        5 - Limpar todas
+        6 - Marcar/Desmarcar concluída
         0 - Sair
-        Escolha uma opção:
+        Escolha:
         """)
 
         if let entrada = readLine(), let opcao = Int(entrada) {
             switch opcao {
             case 1:
-                adicionarTarefa(&tarefas)
+                // Adicionar
+                print("Digite a tarefa:")
+                if let t = readLine(), !t.isEmpty {
+                    tarefas.append("[ ] \(t)") // começa pendente
+                }
+
             case 2:
-                removerTarefa(&tarefas)
+                // Listar
+                if tarefas.isEmpty { print("Nenhuma tarefa.") }
+                else {
+                    for (i, t) in tarefas.enumerated() {
+                        print("\(i+1). \(t)")
+                    }
+                }
+
             case 3:
-                listarTarefas(&tarefas)
+                // Remover
+                print("Número da tarefa para remover:")
+                if let e = readLine(), let i = Int(e),
+                   i > 0 && i <= tarefas.count {
+                    tarefas.remove(at: i-1)
+                }
+
             case 4:
-                editarTarefa(&tarefas)
+                // Contar
+                print("Você tem \(tarefas.count) tarefa(s).")
+
             case 5:
-                marcarTarefa(&tarefas)
+                // Limpar tudo
+                tarefas.removeAll()
+                print("Todas as tarefas foram apagadas.")
+
             case 6:
-                contarPendentes(&tarefas)
+                // Marcar / Desmarcar
+                if tarefas.isEmpty {
+                    print("Nenhuma tarefa.")
+                } else {
+                    for (i, t) in tarefas.enumerated() {
+                        print("\(i+1). \(t)")
+                    }
+                    print("Número da tarefa para marcar/desmarcar:")
+                    if let e = readLine(), let i = Int(e),
+                       i > 0 && i <= tarefas.count {
+                        if tarefas[i-1].hasPrefix("[ ]") {
+                            let texto = tarefas[i-1].dropFirst(3)
+                            tarefas[i-1] = "[x] \(texto)"
+                        } else {
+                            let texto = tarefas[i-1].dropFirst(3)
+                            tarefas[i-1] = "[ ] \(texto)"
+                        }
+                    }
+                }
+
             case 0:
-                print("Saindo do programa...")
+                // Sair
                 rodando = false
+
             default:
                 print("Opção inválida.")
             }
@@ -42,86 +83,4 @@ func iniciarApp() {
     }
 }
 
-
-
-func adicionarTarefa(_ tarefas: inout [String]) {
-    print("Digite a nova tarefa:")
-    if let nova = readLine(), !nova.isEmpty {
-        tarefas.append("[ ] \(nova)")
-        print("Tarefa adicionada.")
-    }
-}
-
-func removerTarefa(_ tarefas: inout [String]) {
-    if tarefas.isEmpty {
-        print("Nenhuma tarefa para remover.")
-        return
-    }
-    listarTarefas(&tarefas)
-    print("Número da tarefa para remover:")
-    if let escolha = readLine(), let indice = Int(escolha),
-       indice > 0 && indice <= tarefas.count {
-        tarefas.remove(at: indice - 1)
-        print("Tarefa removida.")
-    }
-}
-
-func listarTarefas(_ tarefas: inout [String]) {
-    if tarefas.isEmpty {
-        print("Nenhuma tarefa cadastrada.")
-    } else {
-        print("Tarefas:")
-        for (i, t) in tarefas.enumerated() {
-            print("\(i+1). \(t)")
-        }
-    }
-}
-
-func editarTarefa(_ tarefas: inout [String]) {
-    if tarefas.isEmpty {
-        print("Nenhuma tarefa para editar.")
-        return
-    }
-    listarTarefas(&tarefas)
-    print("Número da tarefa para editar:")
-    if let escolha = readLine(), let indice = Int(escolha),
-       indice > 0 && indice <= tarefas.count {
-        print("Digite a nova descrição:")
-        if let nova = readLine(), !nova.isEmpty {
-            let prefixo = tarefas[indice - 1].prefix(3)
-            tarefas[indice - 1] = "\(prefixo)\(nova)"
-            print("Tarefa atualizada.")
-        }
-    }
-}
-
-func marcarTarefa(_ tarefas: inout [String]) {
-    if tarefas.isEmpty {
-        print("Nenhuma tarefa para marcar.")
-        return
-    }
-    listarTarefas(&tarefas)
-    print("Número da tarefa para marcar/desmarcar:")
-    if let escolha = readLine(), let indice = Int(escolha),
-       indice > 0 && indice <= tarefas.count {
-        if tarefas[indice - 1].hasPrefix("[ ]") {
-            let texto = tarefas[indice - 1].dropFirst(3)
-            tarefas[indice - 1] = "[x] \(texto)"
-            print("Tarefa marcada como concluída.")
-        } else {
-            let texto = tarefas[indice - 1].dropFirst(3)
-            tarefas[indice - 1] = "[ ] \(texto)"
-            print("Tarefa marcada como pendente.")
-        }
-    }
-}
-
-// Funcionalidade extra: contar quantas tarefas estão pendentes
-func contarPendentes(_ tarefas: inout [String]) {
-    let pendentes = tarefas.filter { $0.hasPrefix("[ ]") }.count
-    print("Você tem \(pendentes) tarefa(s) pendente(s).")
-}
-
-// Inicia o programa
 iniciarApp()
-
