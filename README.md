@@ -1,13 +1,13 @@
 # Logica-de-programa-o-swift-to-do-list-
 
-# 📝 Swift To-Do List
+#  Swift To-Do List
 
 Um pequeno projeto em **Swift** para treinar lógica de programação e uso de **funções, optionals, e switch-case**.  
 O programa implementa um gerenciador de tarefas simples via terminal, sem uso de variáveis globais.
 
 ---
 
-## 🚀 Funcionalidades
+##  Funcionalidades
 
 - Exibe um menu interativo com opções
 - Listar tarefas
@@ -19,7 +19,7 @@ O programa implementa um gerenciador de tarefas simples via terminal, sem uso de
 
 ---
 
-## 📂 Estrutura do Código
+##  Estrutura do Código
 
 - `iniciarApp()` → Função principal que mostra o menu e controla o fluxo  
 - `listarTarefas(tarefas: [String])` → Exibe todas as tarefas salvas  
@@ -29,7 +29,7 @@ O programa implementa um gerenciador de tarefas simples via terminal, sem uso de
 
 ## ▶️ Exemplo de Execução
 
-=== Lista de Tarefas ===
+Lista de Tarefas 
 1 - Listar tarefas
 2 - Adicionar tarefa
 3 - Remover tarefa
@@ -41,5 +41,5 @@ Digite a nova tarefa:
 Estudar Swift
 Tarefa adicionada com sucesso.
 
-=== Lista de Tarefas ===
+ Lista de Tarefas 
 
