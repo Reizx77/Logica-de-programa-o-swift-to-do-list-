@@ -3,7 +3,7 @@ func iniciarApp() {
 
     while true {
         print("""
-        === Lista de Tarefas ===
+         Lista de Tarefas 
         1 - Adicionar tarefa
         2 - Remover tarefa
         3 - Listar tarefas
