@@ -42,7 +42,7 @@ func iniciarApp() {
     }
 }
 
-// Funções auxiliares (todas usam inout,  globais)
+
 
 func adicionarTarefa(_ tarefas: inout [String]) {
     print("Digite a nova tarefa:")
